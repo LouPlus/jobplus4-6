@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block body %}
+	<h2>Login</h2>
+	<!-- Use POST function in form and set url after click action -->
+	<form method="POST" action="{{ url_for('front.login') }}">
+	<!-- Render the csrf_token provided by flask-wtf -->
+	{{ form.csrf_token }}
+
+	<!-- Use Bootstrap to render the form -->
+	<div class="form-group">
+		<!-- Render the field label first -->
+		{{ form.email.label }}
+		<!-- Render field,StringField will generate a lable<input>,this can be used to set html lable's attribute. -->
+		{{ form.email(class='form-control') }}
+	</div>
+
+	<div class="form-group">
+		{{ form.password.label }}
+		{{ form.password(class='form-control') }}
+	</div>
+
+	<!-- Use class checkbox for rendering BooleanField -->
+	<div class="checkbox">
+		<label>
+			{{ form.remember_me() }}
+			<!-- Get the label's text attribute, which means"Remember me"-->
+			{{ form.remember_me.label.text }}
+		</label>
+	</div>
+
+	<!-- Render submit button with button class in Bootstrap -->
+	{{ form.submit(class="btn btn-primary") }}
+	</form>
+
+{% endblock %}
